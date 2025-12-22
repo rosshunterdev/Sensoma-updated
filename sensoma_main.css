@@ -12,9 +12,6 @@ UTILITY - Buttons
 -------------------
 */
 
-
-
-/* Add this after your body rule */
 :root {
   /* Colors */
   --primary-green: #4CAF50;
@@ -51,8 +48,6 @@ UTILITY - Buttons
   --shadow-button-hover: 0 6px 20px rgba(46, 125, 50, 0.4);
 }
 
-
-
 /*
 ----------
 NAVBAR
@@ -72,26 +67,26 @@ NAVBAR
 	z-index:2500;
 	border-bottom: 2px solid grey;
 	justify-content:center;
-	
 }
 
 .nav-left {
-	position:absolute;
-	left:40px;
-	display:flex;
-	max-width:200px;
-	cursor:pointer;
-	transition:transform 0.2s ease, opacity 0.2s ease;
-}
-
-.nav-left:hover {
-	transform:scale(1.05);
-	opacity:0.8s;
+    position: absolute;
+    left: 40px;
+    display: flex;
+    max-width: 200px;
+    cursor: pointer;
 }
 
 .nav-left img {
-	height:auto;
-	width:45%;
+    height: auto;
+    width: 45%;
+    transition: transform 0.2s ease, opacity 0.2s ease;  /* Move transition here */
+    transform-origin: center;  /* Add this */
+}
+
+.nav-left:hover img {
+    transform: scale(1.05);
+    opacity: 0.8;
 }
 
 .nav-center {
@@ -154,7 +149,7 @@ NAVBAR
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 80px; /* Larger circle to fit "Sensoma" */
+    width: 80px;
     height: 80px;
     text-align: center;
 }
@@ -176,7 +171,7 @@ NAVBAR
 
 .nav-links {
 	display:flex;
-	gap:30px;
+	gap:50px;
 	position:relative;
 	align-items:center;
 	font-weight:bold;
@@ -214,7 +209,6 @@ NAVBAR
     border: none;
     background: transparent;
     transform: translateY(0.5px);*/
-	
 }
 
 .nav-book {
@@ -261,7 +255,6 @@ NAVBAR
   transform: translateY(0.5px);
   color:#4F704E;
 }
-
 
 /*
 ----------------
@@ -312,11 +305,10 @@ HERO PAGE
 	/*padding: 20px 40px 90px 40px;*/
 	padding: 1rem 2rem;
     max-width: 40%; /* Try percentage instead */
-    width: fit-content; /* Add this line too */
+    width: fit-content;
 	margin: 0 auto;
 	text-align:center;
 	gap:30px;
-	
 }
 
 .hero-icon-text {
@@ -333,11 +325,6 @@ HERO PAGE
 .hero-icon-text h1 {
 	font-size:50px;
 }
-
-/* underline for sensoma text below
-dont think its a good idea anymore
-
-HONESTLY MAYBE I SHOULD JUST HAVE 'WELCOME' THERE? */
 
 .brand-name {
   position: relative;
@@ -394,7 +381,6 @@ HONESTLY MAYBE I SHOULD JUST HAVE 'WELCOME' THERE? */
     cursor: pointer;
     margin-top: 20px;
 	border: 1px solid grey;
-
 }
 
 .cta-button:hover {
@@ -448,7 +434,6 @@ HONESTLY MAYBE I SHOULD JUST HAVE 'WELCOME' THERE? */
 .section:nth-child(even) .section-content .image {
   order: 1;
 }
-
 
 @media (max-width: 768px) {
     .navbar {
@@ -529,7 +514,7 @@ HONESTLY MAYBE I SHOULD JUST HAVE 'WELCOME' THERE? */
         display: none;
     }
     
-    /* IMPORTANT: Hide the desktop Book button on mobile */
+    /*Hide the desktop Book button on mobile */
     .nav-right {
         display: none;
     }
@@ -561,7 +546,7 @@ HONESTLY MAYBE I SHOULD JUST HAVE 'WELCOME' THERE? */
 
 /* Hide mobile book link on desktop */
 .mobile-book {
-    display: none;
+    display: none !important;
 }
 
 @media (max-width: 768px) {

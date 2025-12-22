@@ -336,6 +336,18 @@ if (navLogo) {
 		});
 	}
 	
+	/* working 'learn more' button */
+	// Add after line 40 in sensoma_main.js
+	const learnMoreBtn = document.querySelector('.about-more-button button');
+	if (learnMoreBtn) {
+		learnMoreBtn.addEventListener('click', function() {
+			document.getElementById('about').scrollIntoView({
+				behavior: 'smooth',
+				block: 'start'
+			});
+		});
+	}
+	
 	
 	const bookingDateInput = document.getElementById('booking-date');
 
