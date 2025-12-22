@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisa Foster - Professional CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .cv-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+        
+        .contact-info {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+        
+        .availability {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+        }
+        
+        .section h2 {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 12px 20px;
+            margin: -10px -20px 20px -20px;
+            font-size: 1.3rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .profile-summary {
+            background: #ecf0f1;
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 5px solid #3498db;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        
+        .executive-summary {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 5px solid #e74c3c;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .executive-summary strong {
+            color: #2c3e50;
+        }
+        
+        .links {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .links a {
+            color: #2980b9;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        
+        .competencies {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 6px;
+            border-top: 4px solid #9b59b6;
+        }
+        
+        .competencies-list {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        
+        .job-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        .job-title h3 {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            flex: 1;
+        }
+        
+        .job-period {
+            background: #27ae60;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+        
+        .job-description {
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #5d6d7e;
+            font-size: 1rem;
+        }
+        
+        .job-highlight {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .job-sections {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .job-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+        }
+        
+        .job-section h4 {
+            color: #2980b9;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .job-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .job-section li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .job-section li:before {
+            content: "▪";
+            color: #3498db;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+        
+        .metrics {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .metrics strong {
+            color: #d68910;
+        }
+        
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 15px;
+        }
+        
+        .education-item {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .education-item strong {
+            color: #2c3e50;
+        }
+        
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .award-item {
+            background: #fff3cd;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 4px solid #f39c12;
+        }
+        
+        .governance-item {
+            background: #e8f5e8;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 4px solid #27ae60;
+            margin-bottom: 15px;
+        }
+        
+        .uk-section {
+            background: #e3f2fd;
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 5px solid #1976d2;
+            margin-bottom: 20px;
+        }
+        
+        .uk-section h4 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+        
+        .references {
+            text-align: center;
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            font-style: italic;
+            color: #5d6d7e;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, #3498db, #2980b9);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .content {
+                padding: 20px;
+            }
+            .job-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .job-period {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+        
+        @media print {
+            @page {
+                margin: 0.5in;
+                size: A4;
+            }
+            
+            body {
+                background: white !important;
+                padding: 0;
+                font-size: 11pt;
+                line-height: 1.4;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+                max-width: none;
+                margin: 0;
+            }
+            
+            .header {
+                background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%) !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                page-break-inside: avoid;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .section h2 {
+                background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                page-break-after: avoid;
+            }
+            
+            .job-title {
+                page-break-after: avoid;
+            }
+            
+            .job-sections {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .executive-summary,
+            .profile-summary,
+            .metrics,
+            .job-highlight,
+            .uk-section,
+            .competencies,
+            .links,
+            .job-section,
+            .education-item,
+            .award-item,
+            .governance-item {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+                page-break-inside: avoid;
+            }
+            
+            .links a {
+                color: #2980b9 !important;
+                text-decoration: none;
+            }
+            
+            /* Ensure colors print correctly */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+            
+            /* Remove any potential page URLs or timestamps */
+            .print-url, .print-date {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <header class="header">
+            <h1>LISA FOSTER</h1>
+            <div class="subtitle">BSc (Hons) Biomedical Science</div>
+            <div class="subtitle">Chief Executive Officer, Home and Community Health Association (HCHA)</div>
+            <div class="contact-info">
+                lisa.therapies@gmail.com | 📱 0211 206 478<br>
+                Wellington, New Zealand | 💼 linkedin.com/in/lisa‑foster‑41581575
+            </div>
+            <div class="availability">
+                🇬🇧 British Passport Holder | Available for immediate UK relocation | 1 month notice period
+            </div>
+        </header>
+        
+        <div class="content">
+            <section class="section">
+                <div class="profile-summary">
+                    <strong>Dynamic non‑profit leader</strong> with a track record of advocating for excellence, partnership, and sustainability in New Zealand's rare disease, disability, mental health and home and community health sectors. Skilled at strategic planning, stakeholder engagement, governance, and building resilient, equity‑focused organisations.
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="executive-summary">
+                    <strong>Accomplished CEO and rare disease advocacy leader</strong> with over a decade of experience building patient communities, influencing policy, and driving measurable change across health systems. Proven expertise in political advocacy, stakeholder engagement, digital community strategy, and organisational transformation, with a focus on amplifying patient and whānau voices.
+                    <br><br>
+                    As Chief Executive of Rare Disorders NZ, led national advocacy that secured government commitment to New Zealand's first-ever Rare Disorders Strategy, while increasing patient network engagement by 180%. Currently Chief Executive of the Home and Community Health Association (HCHA), delivering a <strong>750% increase in ministerial engagement</strong> in the first year, significantly raising the sector's profile and influence.
+                    <br><br>
+                    <strong>International Recognition:</strong> United Nations speaker alongside former NZ Prime Minister Rt Hon Helen Clark, Board Member of Asia Pacific Alliance of Rare Disease Organisations (APARDO), and regular keynote speaker at prominent global health conferences.
+                </div>
+                
+                <div class="links">
+                    🌐 <a href="https://raredisorders.org.nz">raredisorders.org.nz</a> | 
+                    <a href="https://www.hcha.org.nz">hcha.org.nz</a> | 
+                    <a href="https://www.linkedin.com/in/lisa-foster-41581575/">linkedin.com/in/lisa-foster-41581575/</a>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Core Competencies</h2>
+                <div class="competencies">
+                    <div class="competencies-list">
+                        <strong>Patient & Community Engagement Strategy</strong> • <strong>Culture Change & Transformation</strong> • <strong>Impact Measurement & Evaluation</strong> • <strong>Digital Engagement & Innovation</strong> • <strong>Cross-Sector Relationship Building</strong> • <strong>Stakeholder Alignment & Facilitation</strong> • <strong>Patient Voice Amplification</strong> • <strong>Strategic Communications & Media</strong> • <strong>Inclusive Leadership & Cultural Competency</strong> • <strong>Policy Advocacy & Government Relations</strong>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section">
+                <h2>Professional Experience</h2>
+                
+                <div class="job-title">
+                    <h3>CEO | Home and Community Health Association (HCHA)</h3>
+                    <div class="job-period">January 2024 - Current</div>
+                </div>
+                <div class="job-description">Leading engagement and advocacy strategy for over 40 member organisations who deliver community care to over 110,000+ New Zealanders with 26,000 care and support workers.</div>
+                
+                <div class="metrics">
+                    <strong>Key Metrics:</strong> 750% increase in ministerial meetings in first year • 40+ member organisations • 110,000+ New Zealanders served • 26,000 care and support workers
+                </div>
+                
+                <div class="job-sections">
+                    <div class="job-section">
+                        <h4>Engagement & Culture Leadership</h4>
+                        <ul>
+                            <li>Designed comprehensive stakeholder engagement strategy connecting providers, patients, and policymakers across community health sector</li>
+                            <li>Implemented culture change initiatives increasing membership and engagement through enhanced communication and collaboration frameworks</li>
+                            <li>Developed measurement tools for annual reporting to track service quality outcomes</li>
+                            <li>Created cross-sector dialogue forums facilitating knowledge sharing and best practice</li>
+                            <li>Advocated for strategic partnership frameworks with Ministry of Health, ensuring patient voice remains central to policy development</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="job-title">
+                    <h3>CEO | Hereditary Angioedema (HAE) Australasia</h3>
+                    <div class="job-period">2022 - 2023</div>
+                </div>
+                <div class="job-description">Trans-Tasman patient engagement and advocacy leadership for rare immune disorder community. Pioneered innovative patient engagement strategies and digital storytelling to transform understanding and policy response to rare diseases.</div>
+                
+                <div class="metrics">
+                    <strong>Digital Impact:</strong> 100,000+ video views • Patient journey video series • Policy influence achieved
+                </div>
+                
+                <div class="job-sections">
+                    <div class="job-section">
+                        <h4>Digital Engagement Innovation</h4>
+                        <ul>
+                            <li>Developed award-winning patient journey video series as powerful engagement tool, generating 100,000+ views and direct policy influence</li>
+                            <li>Managed digital community platforms connecting isolated patients across Australia and New Zealand geographic barriers</li>
+                            <li>Worked with international team for impact measurement frameworks tracking patient experience and community connections</li>
+                            <li>Built international collaboration networks expanding patient support and shared learning opportunities</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="job-highlight">
+                    <strong>Concurrent Role:</strong> Te Pou Contractor - Meaningful Mahi Workforce Development Campaign
+                    <br>• Facilitated inclusive engagement strategy connecting 50+ disability care providers through monthly focus groups
+                    <br>• Co-designed culturally responsive recruitment approaches with Ministry for Disabled People-Whaikaha
+                </div>
+
+                <div class="job-title">
+                    <h3>Chief Executive Officer | Rare Disorders New Zealand (RDNZ)</h3>
+                    <div class="job-period">2019 - 2022</div>
+                </div>
+                <div class="job-description">National patient engagement and advocacy leadership for 300,000+ New Zealanders living with rare conditions. Transformed organisational culture and engagement strategy, creating unified patient voice that achieved unprecedented government recognition and policy commitment.</div>
+                <div class="job-description"><em>Previously Relationship Manager (2017-2019)</em></div>
+                
+                <div class="metrics">
+                    <strong>Transformational Results:</strong> Patient network growth from 50 to 150+ groups • 300,000+ New Zealanders impacted • First NZ Rare Disorders Strategy secured • 80+ MPs engaged
+                </div>
+                
+                <div class="job-sections">
+                    <div class="job-section">
+                        <h4>Community Engagement & Network Building</h4>
+                        <ul>
+                            <li><strong>Transformational Growth:</strong> Expanded patient organisation network from 50 to current 150+ groups through innovative engagement strategies</li>
+                            <li><strong>Culture Change Leadership:</strong> Redesigned organisational culture prioritising patient voice and collaborative decision-making</li>
+                            <li><strong>Digital Innovation:</strong> Created online community platforms connecting geographically dispersed rare disease communities</li>
+                            <li><strong>Inclusive Leadership:</strong> Implemented cultural competency frameworks ensuring Te Ao Māori perspectives shaped all advocacy initiatives</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job-section">
+                        <h4>Strategic Policy Engagement</h4>
+                        <ul>
+                            <li><strong>Historic Achievement:</strong> Secured ministerial commitment to develop New Zealand's first Strategy for Rare Disorders</li>
+                            <li><strong>Government Relations:</strong> Positioned RDNZ as trusted partner with Ministry of Health, PHARMAC, and ministerial offices</li>
+                            <li><strong>Parliamentary Engagement:</strong> Led patient voice in briefings reaching 80+ MPs</li>
+                            <li><strong>Cross-Sector Collaboration:</strong> Facilitated relationships between patient communities, clinical workforce, research sector, and pharmaceutical industry</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job-section">
+                        <h4>International Recognition & Impact</h4>
+                        <ul>
+                            <li><strong>United Nations Speaker:</strong> Presented patient-centered rare disease equity solutions alongside Helen Clark and Ukraine Permanent Ambassador (2022)</li>
+                            <li><strong>Regional Leadership:</strong> Board Secretary, Asia Pacific Alliance of Patient Organisations (APARDO)</li>
+                            <li><strong>Global Recognition:</strong> Nominated for American Global Genes Champion of Hope International Award</li>
+                            <li><strong>Media Strategy:</strong> High-profile interviews with Kathryn Ryan (RNZ) and Rachel Smalley, elevating patient voices nationally</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="job-title">
+                    <h3>Service Manager | Emerge Aotearoa</h3>
+                    <div class="job-period">2015 - 2017</div>
+                </div>
+                <div class="job-description">Community engagement leadership for health, disability, housing and wellbeing services. Led patient-centered service delivery focusing on cultural responsiveness, community connection, and strength-based engagement approaches.</div>
+                
+                <div class="metrics">
+                    <strong>Quality Results:</strong> 95%+ compliance with quality standards • 90%+ client satisfaction scores • Zero critical incidents achieved
+                </div>
+                
+                <div class="job-sections">
+                    <div class="job-section">
+                        <h4>Patient-Centered Excellence</h4>
+                        <ul>
+                            <li>Managed comprehensive support services for vulnerable young people prioritising cultural safety and inclusive engagement</li>
+                            <li>Developed innovative pathways connecting hospital services to community support, improving continuity of care</li>
+                            <li>Implemented strength-based peer support model aligned with Māori values of Ako, Whakawhanaunga, and Manaaki</li>
+                            <li>Established collaborative team culture resulting in 95%+ compliance and 90%+ client satisfaction</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="job-title">
+                    <h3>Team Leader | Workwise</h3>
+                    <div class="job-period">2012 - 2015</div>
+                </div>
+                <div class="job-description">Community engagement and empowerment for people facing health challenges. Pioneered integrated engagement approaches connecting health, employment, and community support services.</div>
+                
+                <div class="metrics">
+                    <strong>Performance Excellence:</strong> Team expansion from 4 to 12+ staff • 85%+ employment placement success • National recognition as highest-performing team (2015)
+                </div>
+                
+                <div class="job-sections">
+                    <div class="job-section">
+                        <h4>Innovation in Community Engagement</h4>
+                        <ul>
+                            <li>Led team expansion while maintaining person-centered engagement quality and achieving national recognition</li>
+                            <li>Developed innovative integration model embedding employment consultants within GP practices</li>
+                            <li>Created collaborative frameworks with Community Mental Health Teams demonstrating effective cross-sector engagement</li>
+                            <li>Developed training programs adopted sector-wide, improving engagement practices across New Zealand employment services</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="job-title">
+                    <h3>Team Leader | Enliven, Presbyterian Support Central</h3>
+                    <div class="job-period">2009 - 2012</div>
+                </div>
+                <div class="job-description">Patient-centered community support and engagement for older adults. Led restorative care model prioritising patient choice, community connection, and cultural responsiveness.</div>
+                
+                <div class="metrics">
+                    <strong>Service Excellence:</strong> 500+ older adults served • 90%+ satisfaction rates • 20+ support workers trained • National Innovation Award winner
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="section">
+                <h2>Understanding of UK Rare Disease Landscape</h2>
+                <div class="uk-section">
+                    <h4>Strategic Relevance for UK Market</h4>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1976d2;">▪</span>
+                            <strong>Policy Context:</strong> Experienced in navigating health system reforms and rare disease policy development, directly applicable to England Rare Diseases Action Plan 2025 implementation
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1976d2;">▪</span>
+                            <strong>Cross-Sector Engagement:</strong> Proven expertise working across government, clinical, patient, and industry sectors - essential for UK's complex stakeholder environment
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1976d2;">▪</span>
+                            <strong>Patient Voice Amplification:</strong> Deep understanding of challenges facing rare disease communities, with track record of translating patient experience into policy influence
+                        </li>
+                        <li style="margin-bottom: 10px; padding-left: 20px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #1976d2;">▪</span>
+                            <strong>Cultural Competency:</strong> Experience engaging diverse communities and ensuring inclusive representation - valuable for UK's multicultural patient populations
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Education & Professional Development</h2>
+                <div class="education-grid">
+                    <div class="education-item">
+                        <strong>2025</strong> | Strategic Leadership: Vision, Influence, and Impact | <em>Victoria University of Wellington (In Progress)</em>
+                    </div>
+                    <div class="education-item">
+                        <strong>2022-2023</strong> | Director, Advocacy Beyond Borders | <em>Asia Pacific Region</em>
+                    </div>
+                    <div class="education-item">
+                        <strong>2021</strong> | Professional Media Training | <em>Rare Disorders NZ</em>
+                    </div>
+                    <div class="education-item">
+                        <strong>2019-2022</strong> | Board Secretary | <em>Asia Pacific Alliance of Patient Organisations (APARDO)</em>
+                    </div>
+                    <div class="education-item">
+                        <strong>2017</strong> | He Papa Tikanga, Māori Studies | <em>Te Wananga o Aotearoa</em>
+                    </div>
+                    <div class="education-item">
+                        <strong>2014</strong> | Authentic Disability Leadership Programme | <em>Be Leadership</em>
+                    </div>
+                    <div class="education-item">
+                        <strong>1996</strong> | Psychology Higher Education Foundation Certificate <em>(with Distinction)</em>
+                    </div>
+                    <div class="education-item">
+                        <strong>1993</strong> | BSc (Honours) Biomedical Science
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Awards & Recognition</h2>
+                <div class="awards-grid">
+                    <div class="award-item">
+                        <strong>2022</strong> - American Global Genes Champion of Hope Award <em>(Nominee)</em> - Excellence in patient community engagement
+                    </div>
+                    <div class="award-item">
+                        <strong>2022</strong> - United Nations Speaker on rare disease equity and patient voice amplification
+                    </div>
+                    <div class="award-item">
+                        <strong>2011</strong> - Presbyterian Support Central National Innovation Award <em>(Winner)</em> - Patient experience improvements
+                    </div>
+                    <div class="award-item">
+                        <strong>2010</strong> - Presbyterian Support Regional Innovation Award <em>(Winner)</em> - Community-centered service delivery
+                    </div>
+                    <div class="award-item">
+                        Wellington Airport Community Award <em>(Multiple nominations)</em> - Inclusive community building initiatives
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Governance & Board Experience</h2>
+                <div class="governance-item">
+                    <strong>2019-2022</strong> | Board Secretary | Asia Pacific Alliance of Patient Organisations (APARDO) - Regional patient engagement governance
+                </div>
+                <div class="governance-item">
+                    <strong>2022-2023</strong> | Director | Advocacy Beyond Borders, Asia Pacific - International patient advocacy leadership
+                </div>
+                <div class="governance-item">
+                    <strong>Previous</strong> | Community Coordinator | Timberlea Residents Association - Māori-led community engagement board
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="references">
+                    <strong>References available upon request</strong>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
