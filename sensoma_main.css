@@ -12,6 +12,17 @@ UTILITY - Buttons
 -------------------
 */
 
+/*
+---------------------------
+TO DO
+---------------------------
+
+- add gradient shading at bottom of pages
+- change book screen, make it slide out to the right
+- revamp services page
+
+*/
+
 :root {
   /* Colors */
   --primary-green: #4CAF50;
@@ -804,24 +815,22 @@ About Page
 .section-heading h2 {
 	margin:0;
 	font-size:32px;
-	color:grey;
+	color:#4F704E;
 	font-weight:normal;
 }
 
 .section-heading h3 {
 	margin:10px 0;
 	font-size:18px;
-	color: #888;
+	color: #666666;
     font-weight: normal;
     font-style: italic;
 	
 }
 
-
 .about-header {
 	text-align:center;
 	margin-bottom:40px;
-
 }
 
 .about-header img {
@@ -830,8 +839,13 @@ About Page
 	width:auto;
 	display:block;
 	margin: 0 auto;
-	box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+	box-shadow: 0 6px 20px rgba(79, 112, 78, 0.25);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.about-header img:hover {
+    transform: translateY(-4px);  /* Lifts up instead of scaling */
+    box-shadow: 0 12px 30px rgba(79, 112, 78, 0.25);  /* Larger shadow with your green tint */
 }
 
 .about-header-text {
@@ -842,11 +856,10 @@ About Page
 	
 }
 
-
 .about-header-text p {
     margin: 15px 0 0 0;
     font-size: 16px;
-    color: #666;
+    color: #333333;
     line-height: 1.6;
 }
 
@@ -874,7 +887,7 @@ About Page
 .consultation-text h4 {
     font-family: Georgia, serif;
     font-size: 1rem;
-    color: #888;
+    color: #666666;
     font-style: italic;
     font-weight: normal; /* Remove bold */
     margin-bottom: 20px;
@@ -883,9 +896,16 @@ About Page
 .consultation-text p {
     font-family: Georgia, serif;
     font-size: 1rem;
-    color: #666;
+    color: #333333;
     font-weight: normal;
     line-height: 1.6;
+}
+
+.consultation-text {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .treatment-section {
@@ -915,10 +935,17 @@ About Page
 .treatment-text p {
     font-family: Georgia, serif;
     font-size: 1rem;
-    color: #666;
+    color: #333333;
     font-weight: normal;
     line-height: 1.6;
     margin-bottom: 15px;
+}
+
+.treatment-text {
+    background: rgba(255, 255, 255, 0.4);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .consultation-image img,
@@ -927,7 +954,14 @@ About Page
     max-width: 250px;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(79, 112, 78, 0.35);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.consultation-image img:hover,
+.treatment-image img:hover{
+    transform: translateY(-4px);  /* Lifts up instead of scaling */
+    box-shadow: 0 12px 30px rgba(79, 112, 78, 0.25);  /* Larger shadow with your green tint */
 }
 
 /* Healing section */
@@ -954,7 +988,7 @@ About Page
 .healing-text p {
     font-family: Georgia, serif;
     font-size: 1rem;
-    color: #666;
+    color: #333333;
     line-height: 1.6;
     margin-bottom: 20px;
 }
@@ -970,6 +1004,12 @@ About Page
 	height:auto;
 	border-radius:12px;
 	box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.healing-image img:hover{
+    transform: translateY(-4px);  /* Lifts up instead of scaling */
+    box-shadow: 0 12px 30px rgba(79, 112, 78, 0.25);  /* Larger shadow with your green tint */
 }
 
 
@@ -1012,9 +1052,9 @@ About Page
 .lisa-header p {
     font-family: Georgia, serif;
     font-size: 1.1rem;
-    color: #666;
+    color: #333333;
     line-height: 1.6;
-	/* MAKE ITALICISED */
+	font-style: italic;
 }
 
 .lisa-content {
@@ -1025,19 +1065,46 @@ About Page
     align-items: start;
 }
 
+
 .lisa-image img {
     width: 100%;
     max-width: 250px;
     height: 300px;
     border-radius: 200px 200px 8px 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-	object-fit:cover;
+    object-fit: cover;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.lisa-image img:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(79, 112, 78, 0.25);
+}
+
+/* mouse tracking doesn't work
+
+.lisa-image img {
+    width: 100%;
+    max-width: 250px;
+    height: 300px;
+    border-radius: 200px 200px 8px 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+}
+
+.lisa-image img:hover {
+    box-shadow: 0 12px 30px rgba(79, 112, 78, 0.25);
+}
+
+*/
+
 
 .lisa-qualifications h3 {
     font-family: Georgia, serif;
     font-size: 1.4rem;
-    color: #666;
+    color: #4F704E;
     font-weight: normal;
     margin-bottom: 20px;
 }
@@ -1049,7 +1116,7 @@ About Page
 
 .lisa-qualifications li {
     font-family: Georgia, serif;
-    color: #666;
+    color: #333333;
     margin-bottom: 10px;
     padding-left: 20px;
     position: relative;
@@ -1066,12 +1133,16 @@ About Page
 .lisa-philosophy {
     text-align: center;
     margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .lisa-philosophy p {
     font-family: Georgia, serif;
     font-size: 1.1rem;
-    color: #666;
+    color: #333333;
     line-height: 1.6;
 }
 
@@ -1084,7 +1155,7 @@ About Page
 
 .consultation-cta p {
     font-family: Georgia, serif;
-    color: #666;
+    color: #555555;
     font-style: italic;
     margin-bottom: 20px;
 }
@@ -1233,6 +1304,7 @@ Servives Page:
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease;
   position: relative;
+  margin-bottom:50px;
 }
 
 .service-card:hover {
@@ -1383,43 +1455,74 @@ Servives Page:
   position: relative;
 }
 
-.service-3 .service-image::after {
-  content: '';
-  position: absolute;
-  top: 30%;
-  left: 30%;
-  width: 12px;
-  height: 40px;
+.service-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #4F704E, transparent);
+    margin: 10px auto;
+}
+
+
+.services-pricing-note {
+    text-align: center;
+    margin: 60px auto 40px;
+    padding: 30px;
+    background: rgba(79, 112, 78, 0.08); /* Subtle green tint */
+    border-radius: 15px;
+    max-width: 600px;
+    border: 2px solid rgba(79, 112, 78, 0.15);
+}
+
+.services-pricing-note p:first-child {
+    margin: 5px 0;
+    color: #2c2c2c; /* Darker for emphasis */
+    font-size: 1.2rem;
+}
+
+.services-pricing-note strong {
+    color: #4F704E;
+    font-size: 1.5rem; /* Make price more prominent */
+}
+
+.pricing-subtext {
+    font-style: italic;
+    color: #666;
+    font-size: 0.95rem;
+    margin-top: 8px;
 }
 
 /* Book Now Section */
 .book-now-section {
-  text-align: center;
-  padding: 60px 30px;
-  background: rgba(255, 255, 255, 0.3);
-  margin-top: 60px;
-  border-radius: 25px;
+	text-align: center;
+	padding: 60px 30px;
+	margin-top: 60px;
+	border-radius: 25px;
 }
 
 .book-now-btn {
-  display: inline-block;
-  padding: 16px 40px;
-  background: var(--gradient-primary);
-  color: white;
-  text-decoration: none;
-  border-radius: 30px;
-  font-size: 1.15rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
-  cursor: pointer;
+	display: inline-block;
+	padding: 16px 40px;
+	background: var(--gradient-primary);
+	color: white;
+	text-decoration: none;
+	border-radius: 30px;
+	font-size: 1.15rem;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+	cursor: pointer;
 	border: 2px solid grey;
-  font-family: Georgia, serif;
+	font-family: Georgia, serif;
+	padding: 18px 50px; /* Make button bigger */
+    font-size: 1.1rem;
 }
 
 .book-now-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
 }
+
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
@@ -1506,6 +1609,12 @@ Servives Page:
 	box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 	display:block;
 	margin: 0 auto;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-hero-image img:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(79, 112, 78, 0.25);
 }
 
 .contact-info-card {
@@ -1514,7 +1623,18 @@ Servives Page:
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 	border-radius:20px;
 	text-align:left;
+}
 
+.contact-info-card,
+.contact-form-card {
+    /* Your existing styles stay here */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-info-card:hover,
+.contact-form-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(79, 112, 78, 0.25);
 }
 
 .contact-info-card h2 {

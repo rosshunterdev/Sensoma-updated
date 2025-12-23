@@ -384,4 +384,38 @@ if (bookingDateInput) {
     }
 }
 
+/* Unable to get mouse tracking to work
+
+// mouse tracking function
+const hoverImages = document.querySelectorAll('.about-header img, .consultation-image img, .treatment-image img, .lisa-image img');
+
+hoverImages.forEach(img => {
+    img.addEventListener('mouseenter', function() {
+        // Add a flag when mouse enters
+        this.isHovered = true;
+    });
+    
+    img.addEventListener('mousemove', function(e) {
+        const rect = img.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        // Add lift only when hovering
+        img.style.transform = `perspective(1000px) translateY(-8px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+    
+    img.addEventListener('mouseleave', function() {
+        this.isHovered = false;
+        img.style.transform = 'perspective(1000px) translateY(0) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+});
+
+*/
+
 });
