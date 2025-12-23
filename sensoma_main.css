@@ -952,7 +952,9 @@ About Page
 .treatment-image img {
     width: 100%;
     max-width: 250px;
-    height: auto;
+    height: 100%;
+	min-height:300px;
+	object-fit:cover;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(79, 112, 78, 0.35);
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
