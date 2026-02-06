@@ -41,19 +41,21 @@ if (hamburger) {
 
 
 function openBooking() {
-	underline.classList.remove('active');
-	navLinks.forEach(l => l.classList.remove('active'));
-	
-  bookingOverlay.classList.add('active');
-  bookingPanel.classList.add('active');
-  document.body.style.overflow = 'hidden';
+    // This triggers the CSS slide animation by adding the class to the body
+    document.body.classList.add('booking-open');
+    
+    // Disable scrolling on the main page while booking is open
+    document.body.style.overflow = 'hidden';
 }
 
 function closeBookingPanel() {
-  bookingOverlay.classList.remove('active');
-  bookingPanel.classList.remove('active');
-  document.body.style.overflow = '';
+    // This reverses the slide animation
+    document.body.classList.remove('booking-open');
+    
+    // Re-enable scrolling on the main page
+    document.body.style.overflow = '';
 }
+
 
 // Add event listeners
 bookTriggers.forEach(trigger => {
@@ -61,10 +63,10 @@ bookTriggers.forEach(trigger => {
     e.preventDefault();
     openBooking();
   });
-  
-  brandLink.classList.add('active');
-  moveUnderlineToBrand();
 });
+
+// Initialize brand link as active
+brandLink.classList.add('active');
 
 closeBooking.addEventListener('click', closeBookingPanel);
 bookingOverlay.addEventListener('click', closeBookingPanel);
@@ -115,7 +117,9 @@ bookingOverlay.addEventListener('click', closeBookingPanel);
 	  
 	  closeMobileMenu();
 	  
-	  if (bookingPanel.classList.contains('active')) {
+	  const isBookingOpen = document.body.classList.contains('booking-open');
+	  
+	  if (isBookingOpen) {
 		  closeBookingPanel();
 	  }
 
@@ -140,10 +144,15 @@ bookingOverlay.addEventListener('click', closeBookingPanel);
       console.log('Target section:', targetSection);
 
       if (targetSection) {
-        targetSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+		// If booking was open, wait for the slide animation to complete (700ms)
+		const scrollDelay = isBookingOpen ? 700 : 0;
+		
+		setTimeout(() => {
+			targetSection.scrollIntoView({
+			  behavior: 'smooth',
+			  block: 'start'
+			});
+		}, scrollDelay);
       }
     });
   });
@@ -155,7 +164,9 @@ bookingOverlay.addEventListener('click', closeBookingPanel);
 	
 	closeMobileMenu();
 	
-	if (bookingPanel.classList.contains('active')) {
+	const isBookingOpen = document.body.classList.contains('booking-open');
+	
+	if (isBookingOpen) {
 		closeBookingPanel();
 	}
 
@@ -163,10 +174,15 @@ bookingOverlay.addEventListener('click', closeBookingPanel);
 	brandLink.classList.add('active');
     moveUnderlineToBrand();
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+	// If booking was open, wait for the slide animation to complete (700ms)
+	const scrollDelay = isBookingOpen ? 700 : 0;
+	
+	setTimeout(() => {
+		window.scrollTo({
+		  top: 0,
+		  behavior: 'smooth'
+		});
+	}, scrollDelay);
   });
   
   // Click handling for logo (nav-left)
@@ -178,7 +194,9 @@ if (navLogo) {
 	
 	closeMobileMenu();
     
-    if (bookingPanel.classList.contains('active')) {
+    const isBookingOpen = document.body.classList.contains('booking-open');
+    
+    if (isBookingOpen) {
       closeBookingPanel();
     }
 
@@ -186,10 +204,15 @@ if (navLogo) {
     brandLink.classList.add('active');
     moveUnderlineToBrand();
 
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+	// If booking was open, wait for the slide animation to complete (700ms)
+	const scrollDelay = isBookingOpen ? 700 : 0;
+	
+	setTimeout(() => {
+		window.scrollTo({
+		  top: 0,
+		  behavior: 'smooth'
+		});
+	}, scrollDelay);
   });
   
   navLogo.style.cursor = 'pointer';

@@ -3,6 +3,14 @@ body {
 	margin: 0;
 	font-family: Georgia, serif;
 	overflow-x:hidden;
+	width:100%;
+	position:relative;
+}
+
+#page-wrapper {
+	transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+    width: 100%;
+    position: relative;
 }
 
 /* Secondary colour = #4F704E */
@@ -448,36 +456,40 @@ HERO PAGE
 
 @media (max-width: 768px) {
     .navbar {
-        height: 80px;
-        padding: 0 20px;
+        height: 70px;
+        padding: 0 15px;
     }
     
     .nav-left {
-        left: 20px;
-        max-width: 150px;
+        left: 15px;
+        max-width: 120px;
     }
     
     .nav-left img {
-        width: 60%;
+        width: 70%;
     }
     
     .hamburger {
         display: flex;
+        padding: 15px;
+        right: 10px;
     }
     
     .nav-center {
         position: fixed;
-        top: 80px;
+        top: 70px;
         left: 0;
         width: 100%;
+        height: calc(100vh - 70px);
         background-color: #F9F1E4;
         flex-direction: column;
         gap: 0;
-        padding: 20px 0;
+        padding: 0;
         transform: translateX(-100%);
         transition: transform 0.3s ease;
         border-bottom: 2px solid grey;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
     }
     
     .nav-center.active {
@@ -489,6 +501,7 @@ HERO PAGE
         gap: 0;
         width: 100%;
         align-items: center;
+        padding: 20px 0;
     }
     
     .nav-links .brand-link {
@@ -496,8 +509,10 @@ HERO PAGE
         height: auto;
         padding: 20px;
         border-radius: 0;
-        font-size: 24px;
+        font-size: 26px;
         text-align: center;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(163, 177, 138, 0.2);
     }
     
     .nav-links a {
@@ -507,10 +522,12 @@ HERO PAGE
         border-radius: 0;
         text-align: center;
         font-size: 18px;
+        border-bottom: 1px solid rgba(163, 177, 138, 0.1);
     }
     
-    .nav-links a:hover {
-        background: rgba(163, 177, 138, 0.1);
+    .nav-links a:hover,
+    .nav-links a:active {
+        background: rgba(163, 177, 138, 0.15);
     }
     
     /* Hide separators */
@@ -532,26 +549,34 @@ HERO PAGE
     
     /* Adjust hero section for mobile navbar */
     .hero-section {
-        margin-top: 100px;
-        height: 50vh;
-        min-height: 400px;
+        margin-top: 90px;
+        height: 60vh;
+        min-height: 450px;
     }
     
     .hero-content {
-        max-width: 90%;
-        padding: 1rem;
+        max-width: 95%;
+        padding: 1rem 0.5rem;
     }
     
     .hero-icon-text {
-        padding: 15px 30px;
+        padding: 20px 25px;
     }
     
     .hero-icon-text h1 {
-        font-size: 32px;
+        font-size: 28px;
+        margin-bottom: 10px;
     }
     
     .hero-icon-text p {
-        font-size: 14px;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+    
+    .cta-button {
+        padding: 14px 28px;
+        font-size: 1rem;
+        margin-top: 15px;
     }
 }
 
@@ -563,22 +588,28 @@ HERO PAGE
 @media (max-width: 768px) {
     /* Show mobile book link in hamburger menu */
     .mobile-book {
-        display: block;
-        width: 100%;
+        display: flex !important;
+        width: calc(100% - 40px);
         height: auto;
-        padding: 18px 20px;
-        border-radius: 0;
+        padding: 16px 20px;
+        margin: 20px 20px 10px 20px;
+        border-radius: 12px;
         text-align: center;
         font-size: 18px;
-        background: #A3B18A;
+        background: linear-gradient(135deg, #A3B18A 0%, #8fa076 100%);
         color: white;
-        font-weight: bold;
-        margin-top: 10px;
-        border-top: 1px solid rgba(163, 177, 138, 0.3);
+        font-weight: 600;
+        border: none;
+        box-shadow: 0 4px 12px rgba(163, 177, 138, 0.4);
+        justify-content: center;
+        align-items: center;
     }
     
-    .mobile-book:hover {
-        background: #8fa076;
+    .mobile-book:hover,
+    .mobile-book:active {
+        background: linear-gradient(135deg, #8fa076 0%, #7d8e68 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(163, 177, 138, 0.5);
     }
 }
 
@@ -705,8 +736,8 @@ HERO PAGE
 	.hero-extended {
 		grid-template-columns: 1fr;
 		text-align: center;
-		padding: 40px 20px 30px 20px;
-		gap: 30px;
+		padding: 50px 25px 40px 25px;
+		gap: 35px;
 	}
 	
 	/* Hide down arrow on mobile */
@@ -718,41 +749,44 @@ HERO PAGE
 	.hero-text {
 		order: 1;
 		text-align: center;
-		padding: 0 15px;
-		font-size: 18px;
-		line-height: 1.6;
+		padding: 0 10px;
+		font-size: 19px;
+		line-height: 1.7;
+		color: #555;
 	}
 	
 	/* Image in the middle */
 	.hero-extended-image {
 		order: 2;
-		margin: 20px 0;
+		margin: 15px 0;
 	}
 	
 	.hero-extended-image img {
-		width: 60%;
-		max-width: 200px;
+		width: 50%;
+		max-width: 180px;
 	}
 	
 	/* Second text block */
 	.hero-text-2 {
 		order: 3;
 		text-align: center;
-		padding: 0 15px;
-		font-size: 18px;
-		line-height: 1.6;
+		padding: 0 10px;
+		font-size: 19px;
+		line-height: 1.7;
+		color: #555;
 	}
 	
 	/* Button at the bottom */
 	.about-more-button {
 		order: 4;
-		margin-top: 10px;
+		margin-top: 15px;
 	}
 	
 	.about-more-button button {
-		padding: 15px 30px;
-		font-size: 15px;
+		padding: 16px 32px;
+		font-size: 16px;
 		width: auto;
+		min-width: 200px;
 	}
 }
 
@@ -1529,39 +1563,94 @@ Servives Page:
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .services-hero {
-	height: 200px;
-	margin-bottom: 40px;
+	height: 220px;
+	margin-bottom: 50px;
+	border-radius: 15px;
   }
   
-  .services-header-content {
-	padding: 25px 30px;
+  .services-hero::before {
+	width: 85%;
+	height: 70%;
   }
   
-  .services-header-content h1 {
-	font-size: 2.5rem;
+  .service-header-content {
+	padding: 20px 25px;
+  }
+  
+  .service-header-content h1 {
+	font-size: 2.2rem;
+	margin-bottom: 8px;
+  }
+  
+  .service-header-content p {
+	font-size: 1rem;
+  }
+  
+  .services-container {
+	padding: 0 15px;
+  }
+  
+  .service-card {
+	margin-bottom: 35px;
+	border-radius: 20px;
   }
   
   .service-card-content,
   .service-card:nth-child(even) .service-card-content {
 	grid-template-columns: 1fr;
+	gap: 0;
   }
   
   .service-text,
   .service-card:nth-child(even) .service-text {
 	order: 1;
-	padding: 30px 25px 15px 25px;
+	padding: 30px 25px 20px 25px;
+  }
+  
+  .service-title {
+	font-size: 1.6rem;
+	margin-bottom: 8px;
+  }
+  
+  .service-subtitle {
+	font-size: 1rem;
+	margin-bottom: 15px;
+  }
+  
+  .service-description {
+	font-size: 0.95rem;
+	line-height: 1.7;
   }
   
   .service-image,
   .service-card:nth-child(even) .service-image {
 	order: 2;
-	height: 180px;
+	height: 200px;
+	border-radius: 0 0 20px 20px;
+  }
+  
+  .service-image img {
+	border-radius: 0 0 20px 20px;
   }
   
   .service-meta {
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 10px;
+  }
+  
+  .service-pricing-footer {
+	padding: 25px 20px;
+	font-size: 1rem;
+  }
+  
+  .book-now-section {
+	padding: 30px 20px 50px;
+  }
+  
+  .book-now-btn {
+	padding: 16px 40px;
+	font-size: 1.05rem;
   }
 }
 
@@ -1840,17 +1929,90 @@ Servives Page:
 
 /* Mobile responsive - stack on smaller screens */
 @media (max-width: 768px) {
+	.contact-header h1 {
+		font-size: 2.2rem;
+		margin-bottom: 10px;
+	}
+	
+	.contact-subtitle {
+		font-size: 1.05rem;
+	}
+	
 	.contact-two-column {
 		grid-template-columns: 1fr;
-		gap: 30px;
+		gap: 25px;
+		padding: 0 15px;
+	}
+	
+	.contact-info-card {
+		padding: 30px 25px;
+		border-radius: 18px;
+	}
+	
+	.contact-info-title {
+		font-size: 1.4rem;
+		margin-bottom: 20px;
 	}
 	
 	.contact-item {
-		padding: 8px 0;
+		padding: 12px 0;
+		font-size: 0.95rem;
+	}
+	
+	.contact-icon {
+		font-size: 1.2rem;
 	}
 	
 	.hours-display {
-		padding: 15px;
+		padding: 20px;
+		margin-top: 20px;
+	}
+	
+	.hours-display h3 {
+		font-size: 1.1rem;
+		margin-bottom: 12px;
+	}
+	
+	.hours-content {
+		font-size: 0.95rem;
+		line-height: 1.8;
+	}
+	
+	.contact-form-card {
+		padding: 30px 25px;
+		border-radius: 18px;
+	}
+	
+	.contact-form-card h2 {
+		font-size: 1.4rem;
+		margin-bottom: 8px;
+	}
+	
+	.form-subtitle {
+		font-size: 0.95rem;
+		margin-bottom: 20px;
+	}
+	
+	#contact-form-simple input,
+	#contact-form-simple select,
+	#contact-form-simple textarea {
+		font-size: 16px; /* Prevents zoom on iOS */
+		padding: 14px;
+	}
+	
+	.simple-submit-btn {
+		padding: 16px 30px;
+		font-size: 1.05rem;
+	}
+	
+	.contact-hero-image {
+		margin: 30px 0 40px 0;
+	}
+	
+	.contact-hero-image img {
+		width: 95%;
+		height: 180px;
+		border-radius: 15px;
 	}
 }
 
@@ -1861,40 +2023,50 @@ BOOKING PAGE:
 */
 
 .booking-overlay {
-	position:fixed;
-	top:0;
-	left:0;
-	width:100%;
-	height:100vh;
-	background: rgba(0, 0, 0, 0.6);
-	z-index: 2200;
-	pointer-events:none;
-	opacity: 0;
-	visibility:hidden;
-	transition: all 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 2200;
+    pointer-events: none;
+    background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.booking-overlay.active {
+body.booking-open .booking-overlay {
 	opacity: 1;
-	visibility:visible;
-	pointer-events:auto;
+	visibility: visible;
+	pointer-events: auto;
 }
 
 .booking-panel {
-	position:fixed;
-	top:0;
-	right:0;
-	width:70%;
-	max-width:1000px;
-	height:100vh;
-	background: #F9F1E4;
-	z-index: 2300;
-	transform: translateX(100%);
-	transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-	box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
-	overflow-y: auto;
-	display:flex;
-	flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%; /* Hidden to the right */
+    width: 100%;
+    height: 100vh;
+    background: #F9F1E4;
+    z-index: 2000; /* Just below the navbar (which is usually 3000) */
+    transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+    overflow-y: auto;
+    pointer-events: auto; /* Ensures you can click things! */
+    display: flex;
+    flex-direction: column;
+}
+
+body.booking-open #page-wrapper {
+    transform: translateX(-100%); /* Move site left */
+}
+
+body.booking-open .booking-panel {
+    transform: translateX(-100%); /* Move panel left into the screen */
+}
+
+body.booking-open .navbar {
+    z-index: 3000; /* Ensure navbar stays on top of booking panel */
 }
 
 .booking-sidebar {
@@ -2128,21 +2300,16 @@ BOOKING PAGE:
 		width: 100%;
 	}
 	
-	.booking-form {
-		grid-template-columns: 1fr;
-		padding: 20px;
-	}
-	
-	.booking-content {
-		padding: 20px 20px 40px 20px;
-	}
-	
 	.booking-header {
-		padding: 15px 20px;
+		padding: 18px 20px;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 10px;
 	}
 	
 	.booking-header h2 {
-		font-size: 1.3rem;
+		font-size: 1.4rem;
+		text-align: center;
 	}
 	
 	.booking-header-image {
@@ -2151,17 +2318,86 @@ BOOKING PAGE:
 	}
 	
 	.close-booking {
-		width: 32px;
-		height: 32px;
-		font-size: 20px;
-		top: 15px;
-		right: 15px;
+		width: 34px;
+		height: 34px;
+		font-size: 22px;
+		top: 18px;
+		right: 18px;
+	}
+	
+	.booking-content {
+		padding: 25px 20px 40px 20px;
 	}
 	
 	.booking-intro {
-		font-size: 0.9rem;
-		padding: 12px 15px;
-		margin-bottom: 20px;
+		font-size: 0.95rem;
+		padding: 16px 18px;
+		margin-bottom: 25px;
+	}
+	
+	.booking-form {
+		grid-template-columns: 1fr;
+		padding: 25px 20px;
+		gap: 18px;
+	}
+	
+	.form-group label {
+		font-size: 0.95rem;
+		margin-bottom: 8px;
+	}
+	
+	.form-group input,
+	.form-group select,
+	.form-group textarea {
+		font-size: 16px; /* Prevents iOS zoom */
+		padding: 14px;
+		border-radius: 10px;
+	}
+	
+	.form-group textarea {
+		min-height: 100px;
+	}
+	
+	.booking-submit-btn {
+		padding: 16px 30px;
+		font-size: 1.05rem;
+		margin-top: 15px;
+	}
+	
+	.booking-note {
+		font-size: 0.85rem;
+		line-height: 1.5;
+		margin-top: 15px;
+	}
+	
+	.booking-date-note {
+		font-size: 0.8rem;
+		margin-top: 6px;
+	}
+	
+	/* Success message */
+	.booking-success {
+		padding: 30px 20px;
+	}
+	
+	.success-icon {
+		font-size: 3rem;
+		margin-bottom: 15px;
+	}
+	
+	.booking-success h3 {
+		font-size: 1.3rem;
+		margin-bottom: 12px;
+	}
+	
+	.booking-success p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+	}
+	
+	.booking-done-btn {
+		margin-top: 20px;
+		padding: 14px 30px;
 	}
 }
 	
@@ -2354,22 +2590,164 @@ input[type="date"]:invalid {
 
 /* About section mobile fix */
 @media (max-width: 768px) {
+  .section-heading {
+	margin-bottom: 30px;
+	padding: 0 20px;
+  }
+  
+  .section-heading h2 {
+	font-size: 2rem;
+  }
+  
+  .section-heading h3 {
+	font-size: 1.05rem;
+	margin-top: 8px;
+  }
+  
   .about-header {
     display: flex;
-    flex-direction: column; /* stack text under image */
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    padding: 0 1rem; /* prevent horizontal overflow */
+    gap: 1.5rem;
+    padding: 0 20px;
+	margin-bottom: 50px;
   }
 
   .about-header img {
     width: 100%;
-    max-width: 300px; /* prevent image from being too large */
+    max-width: 280px;
     height: auto;
+	border-radius: 18px;
   }
 
   .about-header-text {
     width: 100%;
     text-align: center;
+	margin-top: 10px;
   }
+  
+  .about-header-text p {
+	font-size: 1rem;
+	line-height: 1.7;
+	padding: 0 5px;
+  }
+  
+  .consultation-section,
+  .treatment-section {
+	padding: 0 20px;
+	margin-bottom: 40px;
+  }
+  
+  .consultation-section h3,
+  .treatment-section h3 {
+	font-size: 1.5rem;
+	margin-bottom: 10px;
+  }
+  
+  .consultation-section h4 {
+	font-size: 0.95rem;
+	margin-bottom: 15px;
+  }
+  
+  .consultation-section p,
+  .treatment-section p {
+	font-size: 0.95rem;
+	line-height: 1.7;
+  }
+  
+  .consultation-image img,
+  .treatment-image img {
+	border-radius: 15px;
+	max-width: 100%;
+  }
+  
+  .lisa-header h2 {
+	font-size: 1.8rem;
+	padding: 0 20px;
+  }
+  
+  .lisa-content {
+	padding: 0 20px;
+  }
+  
+  .lisa-image img {
+	max-width: 250px;
+	border-radius: 15px;
+  }
+  
+  .lisa-qualifications h3 {
+	font-size: 1.3rem;
+	margin-bottom: 15px;
+  }
+  
+  .lisa-qualifications ul {
+	font-size: 0.95rem;
+	line-height: 1.8;
+  }
+  
+  .lisa-philosophy {
+	padding: 0 20px;
+  }
+  
+  .lisa-philosophy p {
+	font-size: 0.95rem;
+	line-height: 1.7;
+  }
+  
+  .consultation-cta {
+	padding: 0 20px;
+	margin-top: 30px;
+  }
+  
+  .consultation-cta p {
+	font-size: 1rem;
+	margin-bottom: 15px;
+  }
+  
+  .book-chat-btn {
+	padding: 14px 30px;
+	font-size: 1rem;
+  }
+}
+
+/* ===================================
+   GENERAL MOBILE IMPROVEMENTS
+   =================================== */
+
+@media (max-width: 768px) {
+	/* Better touch targets for all buttons */
+	button,
+	.cta-button,
+	.book-now-btn,
+	a[class*="btn"] {
+		min-height: 44px; /* iOS recommended touch target */
+		min-width: 44px;
+	}
+	
+	/* Prevent text from being too small */
+	body {
+		font-size: 16px;
+		-webkit-text-size-adjust: 100%;
+	}
+	
+	/* Better spacing for sections */
+	.section {
+		padding: 80px 15px 40px;
+	}
+	
+	.section.large {
+		padding: 80px 15px 40px;
+	}
+	
+	/* Improve readability */
+	p {
+		max-width: 100%;
+		word-wrap: break-word;
+	}
+	
+	/* Smooth scrolling on mobile */
+	html {
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+	}
 }
