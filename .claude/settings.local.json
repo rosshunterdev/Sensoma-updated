@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv styles.css sensoma_main.css assets/css/)",
+      "Bash(mv main.js sensoma_main.js assets/js/)"
+    ]
+  }
+}
