@@ -374,32 +374,6 @@ body:not(.booking-open) .hero-background img {
   box-shadow: 0 8px 28px rgba(79,112,78,0.45);
 }
 
-/* Scroll nudge */
-.hero-scroll-nudge {
-  position: absolute;
-  bottom: 40px;
-  right: 8%;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  animation: heroIn 1s var(--ease-out) 1.4s both;
-}
-
-.nudge-line {
-  display: block;
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, transparent, rgba(249,241,228,0.55));
-}
-
-.nudge-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(249,241,228,0.4);
-}
 
 /* ---------------------------------------------------------------
    8. BRIDGE SECTION
@@ -1397,9 +1371,13 @@ body.booking-open .booking-panel { transform: translateX(0); }
 body.booking-open .navbar        { z-index: 3000; }
 
 .booking-header {
-  padding: 22px 28px;
+  height: var(--navbar-h);
+  padding: 0 40px;
+  background: rgba(249, 241, 228, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(163,177,138,0.25);
-  background: linear-gradient(135deg, var(--cream-mid), var(--cream-warm));
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -1408,7 +1386,6 @@ body.booking-open .navbar        { z-index: 3000; }
   justify-content: center;
   gap: 14px;
   flex-shrink: 0;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
 }
 
 .booking-header-image {
@@ -1418,6 +1395,9 @@ body.booking-open .navbar        { z-index: 3000; }
   border: 2.5px solid var(--green-mid);
   box-shadow: 0 3px 12px rgba(0,0,0,0.12);
 }
+
+/* Logo shown only on mobile — hidden on desktop */
+.booking-header-logo { display: none; }
 
 .booking-header h2 {
   margin: 0;
@@ -1871,18 +1851,32 @@ input[type="date"]:invalid { border-color: #e57373; }
 
   /* Booking header — compact but image stays visible */
   .booking-header {
-    padding: 16px 20px;
-    gap: 10px;
+    padding: 0 60px;
+    gap: 0;
+    justify-content: center;
   }
 
-  .booking-header-image {
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
+  .booking-header-image { display: none; }
+
+  .booking-header-logo {
+    display: block;
+    position: absolute;
+    left: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
   }
 
   .booking-header h2 {
     font-size: 1.15rem;
+    text-align: center;
+    flex: none;
   }
 
   /* Footer */
