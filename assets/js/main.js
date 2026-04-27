@@ -10,11 +10,12 @@
    8.  Brand link & logo scroll-to-top
    9.  Scroll tracking → active nav link
    10. Scroll reveal (IntersectionObserver)
-   11. Booking form submission (Formspree)
-   12. Contact form submission (Formspree)
-   13. "Learn More" button
-   14. "Contact me here" link
-   15. Booking date validation (Fri/Sat/Sun only)
+   11. Client-side form validation
+   12. Booking form submission (Formspree)
+   13. Contact form submission (Formspree)
+   14. "Learn More" button
+   15. "Contact me here" link
+   16. Custom date picker (Fri/Sat/Sun only)
    ================================================================ */
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -97,6 +98,30 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.innerWidth > 640) closeMobileMenu();
   });
 
+  // A3: focus trap + Escape close for the mobile menu
+  if (navCenter) {
+    navCenter.addEventListener('keydown', function (e) {
+      if (!navCenter.classList.contains('active')) return;
+      if (e.key === 'Escape') {
+        closeMobileMenu();
+        if (hamburger) hamburger.focus();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const focusable = Array.from(navCenter.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter(function (el) { return el.getClientRects().length > 0; });
+      if (focusable.length < 2) return;
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+
 
   /* ============================================================
      5. BOOKING PANEL OPEN / CLOSE
@@ -106,8 +131,8 @@ document.addEventListener('DOMContentLoaded', function () {
     bookingOverlay.setAttribute('aria-hidden', 'false');
     bookingPanel.setAttribute('aria-hidden', 'false');
     setTimeout(function () {
-      const closeBtn = document.getElementById('close-booking');
-      if (closeBtn) closeBtn.focus();
+      const firstInput = document.getElementById('booking-name');
+      if (firstInput) firstInput.focus();
     }, 60);
   }
 
@@ -132,16 +157,49 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // A2: focus trap for the booking panel
+  if (bookingPanel) {
+    bookingPanel.addEventListener('keydown', function (e) {
+      if (!body.classList.contains('booking-open') || e.key !== 'Tab') return;
+      const focusable = Array.from(bookingPanel.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )).filter(function (el) { return el.getClientRects().length > 0; });
+      if (focusable.length < 2) return;
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+      }
+    });
+  }
+
 
   /* ============================================================
      6. BOOK-TRIGGER BUTTONS
      ============================================================ */
   bookTriggers.forEach(function (trigger) {
     trigger.addEventListener('click', function (e) {
+      // U1: on touch/mobile viewports suppress the whole-card click — only the
+      // explicit "Book this session" button inside the card should trigger booking.
+      // Descriptions are always visible on mobile so no information is lost.
+      if (trigger.tagName.toLowerCase() === 'article' && window.innerWidth <= 640) return;
       e.preventDefault();
       closeMobileMenu();
       openBookingPanel();
     });
+
+    // A1: <article role="button"> elements don't fire click on Enter/Space natively
+    if (trigger.tagName.toLowerCase() === 'article') {
+      trigger.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          closeMobileMenu();
+          openBookingPanel();
+        }
+      });
+    }
   });
 
 
@@ -153,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Build a lookup: href → { left, width } using offsetLeft/offsetWidth.
   // These are layout-relative (not scroll-relative) so they never jitter.
-  var linkOffsets = {};
+  const linkOffsets = {};
 
   function cacheOffsets() {
     if (!navLinksWrap) return;
@@ -170,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function moveUnderlineTo(href) {
     if (!navUnderline) return;
-    var pos = linkOffsets[href];
+    const pos = linkOffsets[href];
     if (!pos) return;
     navUnderline.style.left  = pos.left  + 'px';
     navUnderline.style.width = pos.width + 'px';
@@ -178,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Which href is currently "active" — single source of truth
-  var currentHref = '#home';
+  let currentHref = '#home';
 
   function setActiveLink(href) {
     if (!href) href = '#home';
@@ -211,16 +269,16 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       closeMobileMenu();
 
-      var href = this.getAttribute('href');
+      const href = this.getAttribute('href');
       setActiveLink(href);                  // move underline immediately
 
-      var wasOpen = body.classList.contains('booking-open');
+      const wasOpen = body.classList.contains('booking-open');
       if (wasOpen) closeBookingPanel();
 
-      var targetId = href.substring(1);
-      var target   = document.getElementById(targetId);
+      const targetId = href.substring(1);
+      const target   = document.getElementById(targetId);
       if (target) {
-        var delay = wasOpen ? 700 : 0;
+        const delay = wasOpen ? 700 : 0;
         setTimeout(function () {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, delay);
@@ -236,9 +294,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e) e.preventDefault();
     closeMobileMenu();
     setActiveLink('#home');                 // move underline immediately
-    var wasOpen = body.classList.contains('booking-open');
+    const wasOpen = body.classList.contains('booking-open');
     if (wasOpen) closeBookingPanel();
-    var delay = wasOpen ? 700 : 0;
+    const delay = wasOpen ? 700 : 0;
     setTimeout(function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, delay);
@@ -262,8 +320,8 @@ document.addEventListener('DOMContentLoaded', function () {
      Only fires when NO click-navigation is pending.
      ============================================================ */
   const scrollableSections = document.querySelectorAll('section[id]');
-  var scrollRaf;
-  var scrollPendingUntil = 0;   // timestamp: ignore scroll events before this
+  let scrollRaf;
+  let scrollPendingUntil = 0;   // timestamp: ignore scroll events before this
 
   navLinks.forEach(function (link) {
     link.addEventListener('click', function () {
@@ -282,9 +340,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (Date.now() < scrollPendingUntil) return;   // click-nav in flight
     cancelAnimationFrame(scrollRaf);
     scrollRaf = requestAnimationFrame(function () {
-      var found = '';
+      let found = '';
       scrollableSections.forEach(function (section) {
-        var rect = section.getBoundingClientRect();
+        const rect = section.getBoundingClientRect();
         if (rect.top <= 160 && rect.bottom >= 160) {
           found = '#' + section.getAttribute('id');
         }
@@ -326,11 +384,95 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   /* ============================================================
-     11. BOOKING FORM SUBMISSION
+     11. CLIENT-SIDE FORM VALIDATION
+     ============================================================ */
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  }
+
+  function showFieldError(el, msg) {
+    el.classList.add('field-error');
+    // Only inject the message element once; re-submitting won't duplicate it
+    if (!el.nextElementSibling || !el.nextElementSibling.classList.contains('field-error-msg')) {
+      const span = document.createElement('span');
+      span.className = 'field-error-msg';
+      span.textContent = msg;
+      el.insertAdjacentElement('afterend', span);
+      // Auto-clear the error state on the next user interaction with this field
+      ['input', 'change'].forEach(function (ev) {
+        el.addEventListener(ev, function () { clearFieldError(el); }, { once: true });
+      });
+    }
+  }
+
+  function clearFieldError(el) {
+    el.classList.remove('field-error');
+    const sibling = el.nextElementSibling;
+    if (sibling && sibling.classList.contains('field-error-msg')) sibling.remove();
+  }
+
+  function validateBookingForm() {
+    let valid = true;
+
+    const nameEl = document.getElementById('booking-name');
+    if (!nameEl.value.trim()) {
+      showFieldError(nameEl, 'Required'); valid = false;
+    }
+
+    const emailEl = document.getElementById('booking-email');
+    if (!isValidEmail(emailEl.value)) {
+      showFieldError(emailEl, emailEl.value.trim() ? 'Enter a valid email address' : 'Required');
+      valid = false;
+    }
+
+    const phoneEl = document.getElementById('booking-phone');
+    if (!phoneEl.value.trim()) {
+      showFieldError(phoneEl, 'Required'); valid = false;
+    }
+
+    const serviceEl = document.getElementById('booking-service');
+    if (!serviceEl.value) {
+      showFieldError(serviceEl, 'Required'); valid = false;
+    }
+
+    const timeEl = document.getElementById('booking-time');
+    if (!timeEl.value) {
+      showFieldError(timeEl, 'Required'); valid = false;
+    }
+
+    return valid;
+  }
+
+  function validateContactForm() {
+    let valid = true;
+
+    const nameEl = document.getElementById('contact-name');
+    if (!nameEl.value.trim()) {
+      showFieldError(nameEl, 'Required'); valid = false;
+    }
+
+    const emailEl = document.getElementById('contact-email');
+    if (!isValidEmail(emailEl.value)) {
+      showFieldError(emailEl, emailEl.value.trim() ? 'Enter a valid email address' : 'Required');
+      valid = false;
+    }
+
+    const msgEl = document.getElementById('contact-message');
+    if (!msgEl.value.trim()) {
+      showFieldError(msgEl, 'Required'); valid = false;
+    }
+
+    return valid;
+  }
+
+
+  /* ============================================================
+     12. BOOKING FORM SUBMISSION
      ============================================================ */
   if (bookingForm) {
     bookingForm.addEventListener('submit', async function (e) {
       e.preventDefault();
+      if (!validateBookingForm()) return;
 
       const submitBtn    = bookingForm.querySelector('.booking-submit-btn');
       const originalText = submitBtn.textContent;
@@ -349,18 +491,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (response.ok) {
-          bookingForm.style.display   = 'none';
-          if (bookingSuccess) bookingSuccess.style.display = 'block';
+          bookingForm.classList.add('is-hidden');
+          if (bookingSuccess) bookingSuccess.classList.remove('is-hidden');
         } else {
           throw new Error('error');
         }
       } catch {
         submitBtn.textContent = 'Failed — please try again';
-        submitBtn.style.background = '#c0392b';
+        submitBtn.classList.add('btn-error');
         setTimeout(function () {
-          submitBtn.textContent      = originalText;
-          submitBtn.style.background = '';
-          submitBtn.disabled         = false;
+          submitBtn.textContent = originalText;
+          submitBtn.classList.remove('btn-error');
+          submitBtn.disabled    = false;
         }, 3000);
       }
     });
@@ -370,19 +512,20 @@ document.addEventListener('DOMContentLoaded', function () {
     bookingDoneBtn.addEventListener('click', function () {
       closeBookingPanel();
       setTimeout(function () {
-        if (bookingForm)    { bookingForm.style.display = 'block'; bookingForm.reset(); }
-        if (bookingSuccess) { bookingSuccess.style.display = 'none'; }
+        if (bookingForm)    { bookingForm.classList.remove('is-hidden'); bookingForm.reset(); }
+        if (bookingSuccess) { bookingSuccess.classList.add('is-hidden'); }
       }, 750);
     });
   }
 
 
   /* ============================================================
-     12. CONTACT FORM SUBMISSION
+     13. CONTACT FORM SUBMISSION
      ============================================================ */
   if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
+      if (!validateContactForm()) return;
 
       const submitBtn    = contactForm.querySelector('.simple-submit-btn');
       const originalText = submitBtn.textContent;
@@ -401,24 +544,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (response.ok) {
-          submitBtn.textContent      = 'Message Sent ✓';
-          submitBtn.style.background = '#4CAF50';
+          submitBtn.textContent = 'Message Sent ✓';
+          submitBtn.classList.add('btn-success');
           contactForm.reset();
           setTimeout(function () {
-            submitBtn.textContent      = originalText;
-            submitBtn.style.background = '';
-            submitBtn.disabled         = false;
+            submitBtn.textContent = originalText;
+            submitBtn.classList.remove('btn-success');
+            submitBtn.disabled    = false;
           }, 3000);
         } else {
           throw new Error('error');
         }
       } catch {
-        submitBtn.textContent      = 'Failed — please try again';
-        submitBtn.style.background = '#c0392b';
+        submitBtn.textContent = 'Failed — please try again';
+        submitBtn.classList.add('btn-error');
         setTimeout(function () {
-          submitBtn.textContent      = originalText;
-          submitBtn.style.background = '';
-          submitBtn.disabled         = false;
+          submitBtn.textContent = originalText;
+          submitBtn.classList.remove('btn-error');
+          submitBtn.disabled    = false;
         }, 3000);
       }
     });
@@ -426,7 +569,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   /* ============================================================
-     13. LEARN MORE BUTTON
+     14. LEARN MORE BUTTON
      ============================================================ */
   if (learnMoreBtn) {
     learnMoreBtn.addEventListener('click', function () {
@@ -437,7 +580,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   /* ============================================================
-     14. CONTACT ME HERE LINK
+     15. CONTACT ME HERE LINK
      ============================================================ */
   if (bookChatBtn) {
     bookChatBtn.addEventListener('click', function (e) {
@@ -449,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
   /* ============================================================
-     15. CUSTOM DATE PICKER — Fri / Sat / Sun only
+     16. CUSTOM DATE PICKER — Fri / Sat / Sun only
      Replaces the native date input with a styled calendar that
      greys out Mon–Thu and only allows Fri, Sat, Sun.
      ============================================================ */
@@ -457,51 +600,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ── Helpers ───────────────────────────────────────────────
     function isAvailable(date) {
-      var d = date.getDay();
+      const d = date.getDay();
       return d === 5 || d === 6 || d === 0; // Fri, Sat, Sun
     }
 
     function toYMD(date) {
-      var y = date.getFullYear();
-      var m = String(date.getMonth() + 1).padStart(2, '0');
-      var d = String(date.getDate()).padStart(2, '0');
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
       return y + '-' + m + '-' + d;
     }
 
     function nextAvailable(from) {
-      var d = new Date(from);
+      const d = new Date(from);
       d.setDate(d.getDate() + 1);
       while (!isAvailable(d)) d.setDate(d.getDate() + 1);
       return d;
     }
 
     // ── Initial selected date ─────────────────────────────────
-    var today      = new Date();
+    const today = new Date();
     today.setHours(0,0,0,0);
-    var selectedDate = nextAvailable(new Date(today.getTime() - 86400000));
+    let selectedDate = nextAvailable(new Date(today.getTime() - 86400000));
     bookingDateInput.value = toYMD(selectedDate);
 
     // ── Build the picker ──────────────────────────────────────
-    var wrapper = bookingDateInput.closest('.booking-date-wrapper');
+    let wrapper = bookingDateInput.closest('.booking-date-wrapper');
     if (!wrapper) wrapper = bookingDateInput.parentElement;
 
     // Hide the native input but keep it in the form
     bookingDateInput.style.cssText = 'position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;';
+    bookingDateInput.tabIndex = -1;
 
     // Display element — shows selected date, opens calendar on click
-    var displayEl = document.createElement('div');
+    const displayEl = document.createElement('div');
     displayEl.className = 'datepicker-display';
     displayEl.setAttribute('tabindex', '0');
     displayEl.setAttribute('role', 'button');
     displayEl.setAttribute('aria-label', 'Choose a date');
 
     // Calendar popup
-    var calEl = document.createElement('div');
+    const calEl = document.createElement('div');
     calEl.className = 'datepicker-cal';
     calEl.setAttribute('aria-hidden', 'true');
 
     // Insert after the label
-    var label = wrapper.querySelector('label');
+    const label = wrapper.querySelector('label');
     if (label) {
       label.after(displayEl);
       displayEl.after(calEl);
@@ -511,13 +655,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Calendar state
-    var viewYear  = selectedDate.getFullYear();
-    var viewMonth = selectedDate.getMonth();
-    var isOpen    = false;
+    let viewYear  = selectedDate.getFullYear();
+    let viewMonth = selectedDate.getMonth();
+    let isOpen    = false;
 
-    var MONTHS = ['January','February','March','April','May','June',
-                  'July','August','September','October','November','December'];
-    var DAYS   = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+    const MONTHS = ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'];
+    const DAYS   = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 
     function formatDisplay(date) {
       return DAYS[date.getDay()] + ' ' +
@@ -527,10 +671,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderCal() {
-      var firstDay = new Date(viewYear, viewMonth, 1).getDay();
-      var daysIn   = new Date(viewYear, viewMonth + 1, 0).getDate();
+      const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+      const daysIn   = new Date(viewYear, viewMonth + 1, 0).getDate();
 
-      var html = '<div class="dp-header">' +
+      let html = '<div class="dp-header">' +
         '<button class="dp-prev" type="button" aria-label="Previous month">‹</button>' +
         '<span class="dp-month-year">' + MONTHS[viewMonth] + ' ' + viewYear + '</span>' +
         '<button class="dp-next" type="button" aria-label="Next month">›</button>' +
@@ -539,22 +683,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Day headers
       DAYS.forEach(function(d, i) {
-        var unavail = (i !== 5 && i !== 6 && i !== 0);
+        const unavail = (i !== 5 && i !== 6 && i !== 0);
         html += '<div class="dp-day-hdr' + (unavail ? ' dp-unavail-hdr' : '') + '">' + d + '</div>';
       });
 
       // Blank cells before 1st
-      for (var b = 0; b < firstDay; b++) {
+      for (let b = 0; b < firstDay; b++) {
         html += '<div class="dp-day dp-empty"></div>';
       }
 
       // Day cells
-      for (var day = 1; day <= daysIn; day++) {
-        var date    = new Date(viewYear, viewMonth, day);
-        var avail   = isAvailable(date);
-        var isPast  = date < today;
-        var isSel   = toYMD(date) === toYMD(selectedDate);
-        var cls     = 'dp-day';
+      for (let day = 1; day <= daysIn; day++) {
+        const date   = new Date(viewYear, viewMonth, day);
+        const avail  = isAvailable(date);
+        const isPast = date < today;
+        const isSel  = toYMD(date) === toYMD(selectedDate);
+        let cls      = 'dp-day';
         if (!avail || isPast) cls += ' dp-disabled';
         else cls += ' dp-available';
         if (isSel && avail && !isPast) cls += ' dp-selected';
@@ -582,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function () {
       calEl.querySelectorAll('.dp-available').forEach(function(cell) {
         cell.addEventListener('click', function(e) {
           e.stopPropagation();
-          var parts = this.getAttribute('data-date').split('-');
+          const parts = this.getAttribute('data-date').split('-');
           selectedDate = new Date(+parts[0], +parts[1]-1, +parts[2]);
           bookingDateInput.value = toYMD(selectedDate);
           // Fire change event so any listeners pick it up
